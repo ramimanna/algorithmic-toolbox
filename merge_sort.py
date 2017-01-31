@@ -16,5 +16,3 @@ def merge_sort(array):
   left = merge_sort(array[:int(len(array)/2)])
   right = merge_sort(array[int(len(array)/2):])
   return combine(left,right)
-
-print(merge_sort([3,4,5,3,2,1]))

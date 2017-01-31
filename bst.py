@@ -15,9 +15,6 @@ Invalid:
 Node(7, Node(5,None,None), Node(14, Node(14,None,None), Node(15,None,None)))
 """
 
-root = Node( 10, Node(8,None,None), Node(12, Node(11, Node(10,None,None),None), Node(13,None,None)))
-
-
 def inorder_traverse(root):
     """
     Traverses a BST in order, producing a sorted list
@@ -69,9 +66,6 @@ def insert(root,x):
   else: node.right = Node(x,None,None)
   return True
 
-insert(root,15)
-# print(root.right.right.right.value)
-
 def height(root):
   """
   Recursively calculates the height of a bst
@@ -90,8 +84,6 @@ def center(width, items):
   spacing = [" "]*int((width-len(items))/2)
   return spacing + items + spacing
 
-print(center(8,["3","4"]))
-
 def draw(root):
   """
   Prints a visualization of a binary tree
@@ -99,7 +91,7 @@ def draw(root):
   @param root: Node which represents root of a tree
 
   """
-  print ("---------------BST---------------")
+  print ("-"*14 + "BST" + "-"*14)
   h = height(root)
   layers = {0:[root]}
   layers_vals = {0:[root.value]}
@@ -125,7 +117,5 @@ def draw(root):
     layer = list(map(str,layers_vals[i]))
     layer = ["X" if not item else item for item in layer]
     print(center(2**h,layer))
-  print("---------------------------------")
-
-draw(root)
+  print("-"*31)
 
