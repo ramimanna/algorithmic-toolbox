@@ -1,6 +1,6 @@
 """
 Example Tree:
-Node( 10, Node(8,None,None), Node(12, Node(11, Node(10,None,None),None), Node(13,None,None)))
+Node(10, Node(8), Node(12, Node(11, Node(10)), Node(13)))
 """
 
 #OOP Representation:
@@ -13,7 +13,6 @@ class Node:
         """
         Traverses a BST in order, producing a sorted list
 
-        @param root: Node which represents root of a tree
         @return list of values from the bst, sorted
         """
         results = []
@@ -24,46 +23,43 @@ class Node:
     def check_bst(self):
       """
       Checks if a tree is a binary search tree
-
-      @param root: Node which represents root of a tree
       @return True iff tree is a binary search tree 
       """
-      if not self.left and not self.right: return True
-      return (self.right and self.value <= self.right.value) and (self.left and self.left.value <= self.value) and self.left.check_bst() and self.right.check_bst()
+      
+      left_valid = not self.left or self.left and self.left.value <= self.value and self.left.check_bst()
+      right_valid = not self.right or self.right and self.right.value >= self.value and self.right.check_bst()
+      
+      return left_valid and right_valid
     def find(self, x):
       """
       Checks if value x is in a binary search tree
 
-      @param root: Node which represents root of a tree
       @param x: int value to be searched for in tree
       @return True iff x is a value in the tree
       """
-      if not self.left and not self.right: return False
-      return x == self.value or (self.left and self.left.find(x)) or (self.right and self.right.find(x))
+      if x == self.value or (self.left and self.left.find(x)) or (self.right and self.right.find(x)):return True
+      else: return False
 
     def insert(self,x):
       """
       Mutates binary search tree by inserting x at a valid position
-
-      @param root: Node which represents root of a tree
+      
       @param x: int value to be inserted into the tree
-      @return True iff opperation successful
+      @return True iff operation successful
       """
       node = self
       # Follow path to valid leaf to perform insert at
       while node.left or node.right:
-        if node.left and node.value > x: node = node.left
-        elif node.right: node = node.right
-      #Now, node is a leaf
-      if x <= node.value: node.left = Node(x,None,None)
-      else: node.right = Node(x,None,None)
-      return True
+        if node.value >= x: node = node.left
+        else: node = node.right
+      # Now, node is a leaf
+      if x < node.value: node.left = Node(x)
+      else: node.right = Node(x)
 
     def height(self):
       """
       Recursively calculates the height of a bst
-
-      @param root: Node which represents root of a tree
+      
       @return int height of the binary search tree
       """
       return max([h.height() for h in [self.left,self.right] if h is not None]+[0]) + 1
@@ -71,8 +67,6 @@ class Node:
     def draw(self):
       """
       Prints a visualization of a binary tree
-
-      @param root: Node which represents root of a tree
 
       """
       print ("-"*14 + "BST" + "-"*14)
