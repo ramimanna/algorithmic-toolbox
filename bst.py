@@ -23,6 +23,7 @@ class Node:
     def check_bst(self):
       """
       Checks if a tree is a binary search tree
+      
       @return True iff tree is a binary search tree 
       """
       
@@ -49,7 +50,7 @@ class Node:
       """
       node = self
       # Follow path to valid leaf to perform insert at
-      while node.left or node.right:
+      while node.left and node.right:
         if node.value >= x: node = node.left
         else: node = node.right
       # Now, node is a leaf
@@ -102,3 +103,7 @@ class Node:
         layer = ["X" if not item else item for item in layer]
         print(center(2**h,layer))
       print("-"*31)
+
+tree = Node(3,None, Node(5,None, Node(8)))
+tree.insert(2)
+
