@@ -1,10 +1,10 @@
 """
 Example Tree:
-Node(10, Node(8), Node(12, Node(11, Node(10)), Node(13)))
+Bst(10, Bst(8), Bst(12, Bst(11, Bst(10)), Bst(13)))
 """
 
 #OOP Representation:
-class Node:
+class Bst:
     def __init__(self,value,left = None,right = None):
         self.value = value
         self.left = left
@@ -54,8 +54,8 @@ class Node:
         if node.value >= x: node = node.left
         else: node = node.right
       # Now, node is a leaf
-      if x < node.value: node.left = Node(x)
-      else: node.right = Node(x)
+      if x < node.value: node.left = Bst(x)
+      else: node.right = Bst(x)
 
     def height(self):
       """
@@ -104,6 +104,6 @@ class Node:
         print(center(2**h,layer))
       print("-"*31)
 
-tree = Node(3,None, Node(5,None, Node(8)))
+tree = Bst(3,None, Bst(5,None, Bst(8)))
 tree.insert(2)
 
