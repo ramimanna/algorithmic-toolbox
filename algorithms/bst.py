@@ -25,11 +25,16 @@ class Bst:
       
       @return True iff tree is a binary search tree 
       """
+      sorted_elems = self.inorder_traverse()
+      for i in range(len(sorted_elems)-1):
+        if sorted_elems[i] > sorted_elems[i+1]:
+          return False
+      return True
+
+      # left_valid = not self.left or self.left and self.left.value <= self.value and self.left.check_bst()
+      # right_valid = not self.right or self.right and self.right.value >= self.value and self.right.check_bst()
       
-      left_valid = not self.left or self.left and self.left.value <= self.value and self.left.check_bst()
-      right_valid = not self.right or self.right and self.right.value >= self.value and self.right.check_bst()
-      
-      return left_valid and right_valid
+      # return left_valid and right_valid
     def find(self, x):
       """
       Checks if value x is in a binary search tree
